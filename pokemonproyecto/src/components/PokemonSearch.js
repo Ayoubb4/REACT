@@ -1,11 +1,15 @@
 // Ejemplo 2: Buscar un Pokémon específico
 import React, { useState } from 'react';
 import axios from 'axios';
+import './PokemonSearch.css';
 
-function PokemonSearch() {
+
+
+function PokemonSearch({ onSelectPokemon }) {
   const [search, setSearch] = useState('');
-  const [pokemon, setPokemon] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
 /*
 	•	search: Almacena el valor ingresado por el usuario en el campo de búsqueda.
 	•	setSearch: Función para actualizar el estado search.
@@ -15,19 +19,39 @@ function PokemonSearch() {
 	•	setError: Función para actualizar el estado error.
 */
 
-  function fetchPokemon() {
-    setError('');
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10/${search.toLowerCase()}`)
-      .then(response => {
-        setPokemon({
-          name: response.data.name,
-          image: response.data.sprites.front_default,
-          type: response.data.types.map(t => t.type.name).join(', ')
-        });
-      })
-      .catch(() => setError('Pokémon no encontrado.'));
-  }
+function fetchPokemon() {
+  if (!search.trim()) return;
 
+  setLoading(true);
+  setError('');
+
+  axios.get(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`)
+    .then(response => {
+      const pokemon = {
+        name: response.data.name,
+        image: response.data.sprites.front_default,
+        height: response.data.height,
+        weight: response.data.weight,
+        types: response.data.types.map(t => t.type.name),
+        stats: response.data.stats.map(s => ({ name: s.stat.name, value: s.base_stat })),
+        color: getColor(response.data.types[0].type.name)
+      };
+      onSelectPokemon(pokemon);
+    })
+    .catch(() => setError('Pokémon no encontrado.'))
+    .finally(() => setLoading(false));
+}
+
+function getColor(type) {
+  const colors = {
+    fire: '#F08030', water: '#6890F0', grass: '#78C850', electric: '#F8D030',
+    ice: '#98D8D8', fighting: '#C03028', poison: '#A040A0', ground: '#E0C068',
+    flying: '#A890F0', psychic: '#F85888', bug: '#A8B820', rock: '#B8A038',
+    ghost: '#705898', dragon: '#7038F8', dark: '#705848', steel: '#B8B8D0',
+    fairy: '#EE99AC', normal: '#A8A878'
+  };
+  return colors[type] || '#A8A878';
+}
   /*
   	•	fetchPokemon: Función que busca un Pokémon usando la API.
 	•	setError(''): Limpia cualquier error previo.
@@ -39,7 +63,7 @@ function PokemonSearch() {
   */
 
   return (
-    <div>
+    <div className="pokemon-search-container">
       <h1>Buscar Pokémon</h1>
       <input
         type="text"
@@ -47,19 +71,15 @@ function PokemonSearch() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button onClick={fetchPokemon}>Buscar</button>
-
-      {error && <p>{error}</p>}
-      {pokemon && (
-        <div>
-          <h2>{pokemon.name}</h2>
-          <img src={pokemon.image} alt={pokemon.name} />
-          <p>Tipo: {pokemon.type}</p>
-        </div>
-      )}
+      <button onClick={fetchPokemon} disabled={loading}>Buscar</button>
+      {loading && <p>Cargando...</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }
+
+export default PokemonSearch;
+
 /*
 	•	<input>:
 	•	value={search}: El valor del input está sincronizado con el estado search.
@@ -72,7 +92,4 @@ function PokemonSearch() {
 	•	<img>: Imagen del Pokémon.
 	•	<p>: Tipo del Pokémon.
 */
-
-export default PokemonSearch;
-
 

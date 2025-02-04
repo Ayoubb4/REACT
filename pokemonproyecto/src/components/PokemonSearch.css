@@ -1,0 +1,164 @@
+body {
+  font-family: 'Baloo Da 2', sans-serif;
+  background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Contenedor principal */
+.pokemon-list-container, .pokemon-search-container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown de filtros */
+.filter {
+  width: 200px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #ff7f50;
+  color: white;
+  cursor: pointer;
+}
+
+/* Grid de Pokémon */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pokemon-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.pokemon-card img {
+  width: 100px;
+  height: auto;
+}
+
+.pokemon-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Estilos para detalles de Pokémon */
+.pokemon-details {
+  background: rgba(255, 127, 80, 0.9);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.pokemon-details img {
+  width: 200px;
+  height: auto;
+}
+
+.pokemon-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 5px 0;
+}
+
+/* Input y botón de búsqueda */
+input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 60%;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff7f50;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #ff5722;
+}
+
+.load-more {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #ffcc00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+}
+
+.load-more:hover {
+  background: #ffaa00;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.close-button {
+  background: red;
+  color: white;
+  border: none;
+  font-size: 18px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
