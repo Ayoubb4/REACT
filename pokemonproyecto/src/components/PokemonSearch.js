@@ -64,7 +64,8 @@ function getColor(type) {
 
   return (
     <div className="pokemon-search-container">
-      <h1>Buscar Pokémon</h1>
+      <h1><img src={require('./poke-removebg-preview.png')} alt="PokeDex_Image" className="h1-image" />
+      </h1>
       <input
         type="text"
         placeholder="Nombre o ID"
