@@ -5,7 +5,6 @@ body {
   padding: 0;
   text-align: center;
 }
-@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
 
 h1 {
   font-family: 'Pokemon Solid', sans-serif;
@@ -13,7 +12,6 @@ h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
-
 
 /* Contenedor principal */
 .pokemon-list-container, .pokemon-search-container {
