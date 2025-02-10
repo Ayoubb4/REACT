@@ -5,12 +5,15 @@ body {
   padding: 0;
   text-align: center;
 }
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
 
 h1 {
+  font-family: 'Pokemon Solid', sans-serif;
   color: #333;
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
+
 
 /* Contenedor principal */
 .pokemon-list-container, .pokemon-search-container {
@@ -137,6 +140,7 @@ button:hover {
   background: #ffaa00;
 }
 
+/* Estilos para el modal */
 .modal {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -148,12 +152,13 @@ button:hover {
 
 .modal-content {
   background: white;
-  padding: 20px;
+  padding: 15px; /* Ajustado para mejor proporción */
   border-radius: 10px;
   text-align: center;
-  max-width: 400px;
+  max-width: 250px; /* Reducido */
 }
 
+/* Botón de cierre */
 .close-button {
   background: red;
   color: white;
@@ -161,4 +166,20 @@ button:hover {
   font-size: 18px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+/* Ajuste para que la imagen no se desplace fuera del modal */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-image {
+  width: 100px; /* Ajustado */
+  height: auto;
+}
+
+.small-details {
+  font-size: 0.9rem; /* Un poco más grande para mejor legibilidad */
 }

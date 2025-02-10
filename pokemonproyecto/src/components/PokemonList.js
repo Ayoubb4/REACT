@@ -4,17 +4,17 @@ import './PokemonSearch.css';
 
 function PokemonList({ onSelectPokemon }) {
   const [pokemons, setPokemons] = useState([]);
+  const [allPokemons, setAllPokemons] = useState([]); // Guardamos todos los Pokémon originales aquí
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [types, setTypes] = useState([]);
   const [selectedType, setSelectedType] = useState('');
   const [offset, setOffset] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
-  const limit = 20; 
+  const limit = 20;
 
   useEffect(() => {
-    loadMorePokemons(0);
-
+    loadPokemons();
+    // Obtener todos los tipos de Pokémon
     axios.get('https://pokeapi.co/api/v2/type')
       .then(response => {
         setTypes(response.data.results.map(t => t.name));
@@ -22,10 +22,11 @@ function PokemonList({ onSelectPokemon }) {
       .catch(() => setTypes([]));
   }, []);
 
-  const loadMorePokemons = (newOffset) => {
-    if (!hasMore) return;
+  // Cargar Pokémon sin filtro
+  const loadPokemons = () => {
     setLoading(true);
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${newOffset}`)
+    setError('');
+    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
       .then(response => {
         const fetches = response.data.results.map(pokemon =>
           axios.get(pokemon.url).then(res => ({
@@ -39,17 +40,54 @@ function PokemonList({ onSelectPokemon }) {
           }))
         );
 
-        Promise.all(fetches).then(newPokemons => {
-          setPokemons(prev => [...prev, ...newPokemons]);
-          setOffset(newOffset + limit);
-          setHasMore(response.data.next !== null);
+        Promise.all(fetches).then(allFetchedPokemons => {
+          const allPokemonsList = [...pokemons, ...allFetchedPokemons];
+          setPokemons(allPokemonsList);
+          setAllPokemons(allPokemonsList); // Guardamos todos los Pokémon originales
           setLoading(false);
+          setOffset(prevOffset => prevOffset + limit); // Actualizar offset
         });
       })
       .catch(() => {
         setError('Error al obtener los datos.');
         setLoading(false);
       });
+  };
+
+  // Filtrar Pokémon por tipo
+  const filterPokemonsByType = (type) => {
+    setSelectedType(type);
+    setLoading(true);
+
+    axios.get(`https://pokeapi.co/api/v2/type/${type}`)
+      .then(response => {
+        const fetches = response.data.pokemon.map(pokemon =>
+          axios.get(pokemon.pokemon.url).then(res => ({
+            name: res.data.name,
+            image: res.data.sprites?.other["official-artwork"]?.front_default || res.data.sprites?.front_default || 'https://via.placeholder.com/150',
+            height: res.data.height,
+            weight: res.data.weight,
+            types: res.data.types.map(t => t.type.name),
+            color: getColor(res.data.types[0]?.type.name),
+            stats: res.data.stats.map(s => ({ name: s.stat.name, value: s.base_stat }))
+          }))
+        );
+
+        Promise.all(fetches).then(filteredPokemons => {
+          setPokemons(filteredPokemons); // Actualizamos solo los Pokémon filtrados
+          setLoading(false);
+        });
+      })
+      .catch(() => {
+        setError('Error al obtener los Pokémon del tipo seleccionado.');
+        setLoading(false);
+      });
+  };
+
+  // Volver a cargar todos los Pokémon originales
+  const handleBackToStart = () => {
+    setSelectedType('');
+    setPokemons(allPokemons); // Restablecer los Pokémon a la lista original
   };
 
   function getColor(type) {
@@ -66,21 +104,17 @@ function PokemonList({ onSelectPokemon }) {
   if (loading && pokemons.length === 0) return <p>Cargando...</p>;
   if (error) return <p className="error-message">{error}</p>;
 
-  const filteredPokemons = selectedType
-    ? pokemons.filter(pokemon => pokemon.types.includes(selectedType))
-    : pokemons;
-
   return (
     <div className="pokemon-list-container">
-      <h1>Lista de Pokemon</h1>
-      <select onChange={(e) => setSelectedType(e.target.value)} value={selectedType} className="filter">
+      <h1>Lista de Pokémon</h1>
+      <select onChange={(e) => filterPokemonsByType(e.target.value)} value={selectedType} className="filter">
         <option value="">Todos los tipos</option>
         {types.map((type, index) => (
           <option key={index} value={type}>{type}</option>
         ))}
       </select>
       <div className="pokemon-grid">
-        {filteredPokemons.map((pokemon, index) => (
+        {pokemons.map((pokemon, index) => (
           <div 
             key={index} 
             className="pokemon-card" 
@@ -93,12 +127,15 @@ function PokemonList({ onSelectPokemon }) {
           </div>
         ))}
       </div>
-      {hasMore && !loading && (
-        <button className="load-more" onClick={() => loadMorePokemons(offset)}>
-          Cargar mas Pokemon
+      {selectedType ? (
+        <button className="load-more" onClick={handleBackToStart}>
+          Volver al inicio
+        </button>
+      ) : (
+        <button className="load-more" onClick={loadPokemons}>
+          Cargar más Pokémon
         </button>
       )}
-      {loading && <p>Cargando mas Pokemon...</p>}
     </div>
   );
 }
