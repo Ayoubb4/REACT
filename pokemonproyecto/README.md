@@ -20,4 +20,4 @@ Bienvenido a la Pokedex, una aplicación web donde puedes explorar información 
 1. Clona este repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/pokedex.git
+   git clone [https://github.com//pokedex.git](https://github.com/Ayoubb4/REACT/edit/master/pokemonproyecto/)
