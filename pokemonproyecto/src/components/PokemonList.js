@@ -120,7 +120,7 @@ function PokemonList({ onSelectPokemon }) {
             className="pokemon-card" 
             style={{ backgroundColor: pokemon.color }}
             onClick={() => onSelectPokemon(pokemon)}
-          >
+          >                                                                                                      
             <h2>{pokemon.name}</h2>
             <img src={pokemon.image} alt={pokemon.name} onError={(e) => e.target.src = 'https://via.placeholder.com/150'} />
             <p><strong>Tipo:</strong> {pokemon.types.join(', ')}</p>
