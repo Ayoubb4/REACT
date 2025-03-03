@@ -1,5 +1,11 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en una columna */
+  justify-content: center; /* Centra los elementos verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
+  text-align: center; /* Centra el texto */
 }
 
 .App-logo {
@@ -15,7 +21,6 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +40,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Si necesitas algún estilo para los componentes, añádelos aquí */
+.Ejercicio {
+  margin: 10px; /* Espacio entre los componentes */
 }
