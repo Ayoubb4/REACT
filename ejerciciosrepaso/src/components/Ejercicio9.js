@@ -4,7 +4,7 @@ Crea un formulario con nombre y edad y muestra los valores ingresados en pantall
 
 import React, { useState } from 'react';
 
-function Formulario() {
+function Ejercicio9() {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
 
@@ -28,4 +28,4 @@ function Formulario() {
   );
 }
 
-export default Formulario;
+export default Ejercicio9;

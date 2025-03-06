@@ -4,7 +4,7 @@ function Hijo(props) {
   return (
     <div>
       <h2>Componente Hijo</h2>
-      <p>{props.mensaje}</p>
+      <p>{props.mensajeDelPadre}</p>
     </div>
   );
 }

@@ -2,12 +2,12 @@ import React from 'react';
 import Hijo from './Hijo';
 
 function Padre() {
-  const mensaje = "Hola desde el Padre";
+  var mensaje = "Hola desde el padre!";
 
   return (
     <div>
       <h1>Componente Padre</h1>
-      <Hijo mensaje={mensaje} />
+      <Hijo mensajeDelPadre={mensaje} />
     </div>
   );
 }

@@ -1,20 +1,17 @@
 /*  Evento en Botón 
 Crea un botón que, al hacer clic, cambie el color de fondo de la página. */
+import React from 'react';
 
-import React, { useState } from 'react';
-
-function App() {
-  const [color, setColor] = useState('white');
-
-  const cambiarColor = () => {
-    setColor(color === 'white' ? 'lightblue' : 'white');
-  };
+function Ejercicio5({ color, setColorFondo }) {
+  function cambiarColor() {
+    setColorFondo(prevColor => (prevColor === 'red' ? 'white' : 'red'));
+  }
 
   return (
-    <div style={{ backgroundColor: color, height: '100vh' }}>
-      <button onClick={cambiarColor}>Cambiar Color de Fondo</button>
+    <div>
+      <button onClick={cambiarColor}>Cambiar Color</button>
     </div>
   );
 }
 
-export default App;
+export default Ejercicio5;

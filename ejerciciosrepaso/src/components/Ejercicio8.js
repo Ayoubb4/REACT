@@ -4,13 +4,13 @@ Crea un temporizador que aumente cada segundo y se detenga cuando llegue a 10.
 
 import React, { useState, useEffect } from 'react';
 
-function Temporizador() {
+function Ejercicio8() {
   const [contador, setContador] = useState(0);
 
   useEffect(() => {
     if (contador < 10) {
       const intervalo = setTimeout(() => setContador(contador + 1), 1000);
-      return () => clearTimeout(intervalo); // Limpia el intervalo cuando el componente se desmonta o el contador cambia
+      return () => clearTimeout(intervalo);
     }
   }, [contador]); // Se ejecuta cada vez que cambia "contador"
 
@@ -21,4 +21,4 @@ function Temporizador() {
   );
 }
 
-export default Temporizador;
+export default Ejercicio8;
