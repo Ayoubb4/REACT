@@ -11,7 +11,6 @@ import axios from 'axios';
 function Clima(){
 
     const[temperatura, setTemperatura] = useState(null);
-    const [fechaHora, setFechaHora] = useState("");
 
     useEffect(function(){
         axios

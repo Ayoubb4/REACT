@@ -16,6 +16,15 @@ import Ejercicio12 from './components/Ejercicio12';
 import Ejercicio13 from './components/Ejercicio13';
 import Ejercicio14 from './components/Ejercicio14';
 import Clima from './components/Ejercicio15/Clima'
+import FechaHoy from './components/Ejercicio15/FechaHoy'
+import { AgendaProvider } from './components/Ejercicio16.js/AgendaPadre';
+import Contactos from './components/Ejercicio16.js/Contactos'; // Componente para mostrar los contactos
+import Citas from './components/Ejercicio16.js/Citas'; // Componente para mostrar las citas
+import Ejercicio17 from './components/Ejercicio17';
+import Ejercicio18 from './components/Ejercicio18';
+import Ejercicio19 from './components/Ejercicio19';
+
+
 
 function App() {
   const [cambiarColorFondo, setCambiarColorFondo] = useState('white'); // Iniciamos el color en blanco
@@ -49,7 +58,19 @@ function App() {
       <Ejercicio13/>
       <Ejercicio14/>
       <Clima/>
+      <FechaHoy/>
 
+      <AgendaProvider> 
+      <div>
+        <h1>Mi Agenda</h1>
+        <Contactos />
+        <Citas />
+      </div>
+    </AgendaProvider>
+
+    <Ejercicio17/>
+    <Ejercicio18/>
+    <Ejercicio19/>  
     </div>
 
     

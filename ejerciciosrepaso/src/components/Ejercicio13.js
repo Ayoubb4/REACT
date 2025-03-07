@@ -47,7 +47,7 @@ function Ejercicio13() {
             return t.nombre.includes(filtro);})//se filtra por nombre
 
             .sort(function(a,b){
-                return a.fecha -b.fecha;})//Ordena por Fecha
+                return a.fecha - b.fecha;})//Ordena por Fecha
   }
 
   return (

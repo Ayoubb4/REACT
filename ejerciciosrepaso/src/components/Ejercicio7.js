@@ -1,3 +1,6 @@
+/* Cambio de Tema (Modo Oscuro 
+Crea un botón “Modo Oscuro” que guarde la preferencia en LocalStorage. 
+ */
 import React from 'react';
 
 function Ejercicio7({ setColorFondo }) {

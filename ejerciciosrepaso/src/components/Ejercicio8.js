@@ -7,12 +7,12 @@ import React, { useState, useEffect } from 'react';
 function Ejercicio8() {
   const [contador, setContador] = useState(0);
 
-  useEffect(() => {
-    if (contador < 10) {
-      const intervalo = setTimeout(() => setContador(contador + 1), 1000);
-      return () => clearTimeout(intervalo);
-    }
-  }, [contador]); // Se ejecuta cada vez que cambia "contador"
+    useEffect(() => {
+      if (contador < 10) {
+        const intervalo = setTimeout(() => setContador(contador + 1), 1000);
+        return () => clearTimeout(intervalo);
+      }
+    }, [contador]); // Se ejecuta cada vez que cambia "contador"
 
   return (
     <div>
