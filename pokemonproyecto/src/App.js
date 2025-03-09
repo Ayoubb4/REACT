@@ -5,44 +5,43 @@ import Battle from './components/Battle'; // Importamos el componente de batalla
 import './App.css';
 
 function App() {
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState(null); // Estado para el Pokémon seleccionado
+  const [isVisible, setIsVisible] = useState(false); // Estado para controlar la visibilidad del botón "Subir"
   const [showBattleScreen, setShowBattleScreen] = useState(false); // Estado para mostrar la pantalla de batalla
 
   useEffect(() => {
     // Detecta el scroll para mostrar u ocultar el botón de subir
     const handleScroll = () => {
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        setIsVisible(true);
+        setIsVisible(true); // Si el scroll es mayor a 300, mostramos el botón de subir
       } else {
-        setIsVisible(false);
+        setIsVisible(false); // Si el scroll es menor a 300, ocultamos el botón de subir
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll); // Añadimos el evento de scroll
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll); // Limpiamos el evento cuando el componente se desmonta
     };
   }, []);
 
   // Función para desplazar al principio de la página
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazamos la página hacia arriba con un comportamiento suave
   };
 
   return (
     <div className="app-container">
       {!showBattleScreen ? (
         <>
-          <PokemonSearch onSelectPokemon={setSelectedPokemon} />
-          <PokemonList onSelectPokemon={setSelectedPokemon} />
+          <PokemonSearch onSelectPokemon={setSelectedPokemon} /> {/* Componente para buscar un Pokémon */}
+          <PokemonList onSelectPokemon={setSelectedPokemon} /> {/* Componente para mostrar la lista de Pokémon */}
 
           {/* Botón para iniciar la batalla */}
           <button className="battle-button" onClick={() => setShowBattleScreen(true)}>
             Ir a Batalla
           </button>
-
 
           {selectedPokemon && (
             <div className="modal-overlay" onClick={() => setSelectedPokemon(null)}>
@@ -70,7 +69,7 @@ function App() {
         </>
       ) : (
         <>
-          <Battle />
+          <Battle /> {/* Componente para la batalla */}
           <button className="battle-back-button" onClick={() => setShowBattleScreen(false)}>
             Volver a la Pokédex
           </button>
