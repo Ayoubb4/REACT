@@ -7,6 +7,82 @@ Modifica el formulario de nombre y edad para que:
 import { use, useState } from "react";
 
 function Ejercicio11(){
+  const [nombre, setNombre] = useState('');
+  const [edad, setEdad] = useState('');
+  const[error, setError] = useState('');
+
+  function manejaError(evento){
+    evento.preventDefault();
+    if(nombre.trim() === ''){
+
+      setError("El nombre no puede estar vacio");
+      return;
+    }
+
+    const numeroEdad = Number(edad);
+
+    if(numeroEdad <=0 || numeroEdad === ''){
+      setError("La edad no puede estar vacia y no puede ser menor o igual a 0");
+      return;
+    }
+
+    setError('');
+  }
+
+  return(
+    <div>
+      <form onSubmit={manejaError}>
+        <div>
+          <input type="text" value={nombre} onChange={function (entrada){ setNombre(entrada.target.value)}}/>
+        </div>
+
+        <div>
+          <input type="number" value={edad} onChange={function (entrada){ setEdad(entrada.target.value)}}/>
+        </div>
+
+        <p>{error}</p>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  )
+}
+
+export default Ejercicio11;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* function Ejercicio11(){
     const [nombre, setNombre] = useState('');
     const [edad, setEdad] = useState('');
     const [error, setError] = useState('');
@@ -67,4 +143,4 @@ function Ejercicio11(){
 }
 
 export default Ejercicio11;
-
+ */

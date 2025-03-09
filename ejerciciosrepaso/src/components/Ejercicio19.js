@@ -9,7 +9,7 @@ function Pokemon() {
     const [datos, setDatos] = useState(null)
     const [error, setError] = useState(null)
 
-    const buscar = () => {
+    function buscar () {
 
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`)
             .then((response) => {

@@ -4,6 +4,92 @@ Crea una agenda donde el usuario pueda agregar, eliminar y filtrar contactos por
 import React, { useState } from "react";
 
 function Ejercicio12(){
+    const [nombre, setNombre] = useState('');
+    const [telefono, setTelefono] = useState('');
+    const [filtro, setFiltro] =  useState('');
+    const [contactos, setContactos] = useState([]);
+
+
+    function agregarContacto(evento){
+        evento.preventDefault();
+
+        const nuevoContacto={nombre, telefono};
+        setContactos([...contactos, nuevoContacto]);
+        setNombre('');
+        setTelefono('');
+    }
+
+    function eliminarContacto(indice){
+        const contactosRestantes = contactos.filter(function(_, i){
+            return i !== indice;
+        });
+        setContactos(contactosRestantes);
+    }
+    
+    function filtrarContactos(){
+        return contactos.filter(contacto => contacto.nombre.indexOf(filtro) !== -1);
+    }
+
+    return(
+
+        
+    )
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* import React, { useState } from "react";
+
+function Ejercicio12(){
     const [contactos, setContactos] = useState([]);
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
@@ -81,4 +167,4 @@ function Ejercicio12(){
 }
 
 export default Ejercicio12;
- 
+  */

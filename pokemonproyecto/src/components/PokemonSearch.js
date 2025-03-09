@@ -87,7 +87,7 @@ export default PokemonSearch;
 	•	onChange: Actualiza el estado search con el texto ingresado por el usuario.
 	•	<button>:
 	•	onClick={fetchPokemon}: Llama a la función fetchPokemon cuando se hace clic.
-    	•	error && <p>{error}</p>: Si hay un error, muestra el mensaje de error.
+    	•	error && <p>{error}</Ap>: Si hay un error, muestra el mensaje de error.
 	•	pokemon && (...): Si se encuentra un Pokémon, muestra:
 	•	<h2>: Nombre del Pokémon.
 	•	<img>: Imagen del Pokémon.

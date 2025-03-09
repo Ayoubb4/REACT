@@ -17,12 +17,13 @@ import Ejercicio13 from './components/Ejercicio13';
 import Ejercicio14 from './components/Ejercicio14';
 import Clima from './components/Ejercicio15/Clima'
 import FechaHoy from './components/Ejercicio15/FechaHoy'
-import { AgendaProvider } from './components/Ejercicio16.js/AgendaPadre';
-import Contactos from './components/Ejercicio16.js/Contactos'; // Componente para mostrar los contactos
-import Citas from './components/Ejercicio16.js/Citas'; // Componente para mostrar las citas
+import { AgendaProvider } from './components/Ejercicio16/AgendaPadre';
+import Contactos from './components/Ejercicio16/Contactos'; // Componente para mostrar los contactos
+import Citas from './components/Ejercicio16/Citas'; // Componente para mostrar las citas
 import Ejercicio17 from './components/Ejercicio17';
 import Ejercicio18 from './components/Ejercicio18';
 import Ejercicio19 from './components/Ejercicio19';
+import Prueba1 from './components/Prueba1';
 
 
 
@@ -71,6 +72,10 @@ function App() {
     <Ejercicio17/>
     <Ejercicio18/>
     <Ejercicio19/>  
+
+
+
+    <Prueba1/>
     </div>
 
     
